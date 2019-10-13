@@ -8,7 +8,9 @@ import {User} from '../user';
 })
 export class SidebarComponent implements OnInit {
   constructor() { }
-
+  logout(){
+    localStorage.clear();
+  }
   ngOnInit() {
   }
 

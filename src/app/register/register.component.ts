@@ -9,6 +9,7 @@ import {User} from "../user";
 })
 export class RegisterComponent implements OnInit {
   regOK: boolean;
+  regWas: boolean;
   serverUrl : string;
   currentLocation : string;
   upperLocation: string;
@@ -21,6 +22,7 @@ export class RegisterComponent implements OnInit {
     this.serverUrl = "https://assimilite.herokuapp.com/";
     this.user = JSON.parse(localStorage.getItem("user"));
     this.regOK = false;
+    this.regWas = false;
   }
 
   postInputValue() {
@@ -41,9 +43,12 @@ export class RegisterComponent implements OnInit {
         console.log('post call successful value returned in body',
           val);
         this.regOK = true;
+        this.regWas = true;
       },
       response => {
         console.log('post call in error', response);
+        this.regOK = false;
+        this.regWas = true;
       },
       () => {
         console.log('The post observable is now completed.');
