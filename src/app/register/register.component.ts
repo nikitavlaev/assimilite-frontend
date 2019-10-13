@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {User} from "../user";
 
 @Component({
   selector: 'app-register',
@@ -7,20 +8,28 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  regOK: boolean;
   serverUrl : string;
   currentLocation : string;
   upperLocation: string;
+  user: User;
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
     this.currentLocation = window.location.href;
     this.upperLocation = this.currentLocation.substring(0,this.currentLocation.lastIndexOf('/'));
     this.serverUrl = "https://assimilite.herokuapp.com/";
-
+    this.user = JSON.parse(localStorage.getItem("user"));
+    this.regOK = false;
   }
 
   postInputValue() {
-    let isAdmin = ((<HTMLInputElement> document.getElementById("isAdmin")).checked);
+    let isAdmin : boolean;
+    if (document.getElementById("isAdmin") == null) {
+      { isAdmin = false}
+    } else {
+      isAdmin = ((<HTMLInputElement> document.getElementById("isAdmin")).checked);
+    };
     let name = (<HTMLInputElement> document.getElementById("name")).value;
     let email = (<HTMLInputElement> document.getElementById("email")).value;
     let password = (<HTMLInputElement> document.getElementById("password")).value;
@@ -31,6 +40,7 @@ export class RegisterComponent implements OnInit {
       val => {
         console.log('post call successful value returned in body',
           val);
+        this.regOK = true;
       },
       response => {
         console.log('post call in error', response);

@@ -4,8 +4,7 @@
       <article class="card-body">
         <a href="{{upperLocation}}/login" class="float-right btn btn-outline-primary">Sign in</a>
         <h4 class="card-title mb-4 mt-1">Sign up</h4>
-
-          <div class="form-group">
+          <div *ngIf="user != null && user.type == 1" class="form-group">
             <label class="form-label">Admin rights
               <input type="checkbox" id="isAdmin" class="form-checkbox" placeholder="off">
             </label>
@@ -30,6 +29,7 @@
             </button>
           </div> <!-- form-group// -->
       </article>
+      <span *ngIf="regOK == true">Registered OK</span>
     </div> <!-- card.// -->
   </div>
 </div>

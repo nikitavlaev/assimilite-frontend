@@ -245,7 +245,7 @@ export class MainComponent implements OnInit {
             }
           }
         };
-        th.http.post(`${serverUrl}api/add_model`, quest, this.options)
+        th.http.post(`${serverUrl}api/add_quest`, quest, this.options)
           .subscribe(
             val => {
               console.log('post quest call successful value returned in body',
