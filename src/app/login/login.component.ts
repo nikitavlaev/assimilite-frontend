@@ -32,6 +32,7 @@ x
         console.log('post call successful value returned in body',
           val);
         let user: User = {
+          id: val['id'],
           name: val['name'],
           email: email,
           password: password,

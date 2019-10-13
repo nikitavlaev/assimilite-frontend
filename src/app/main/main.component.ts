@@ -108,8 +108,18 @@ export class MainComponent implements OnInit {
   headers = new HttpHeaders({'Content-Type': 'application/json'});
   options = {headers: this.headers};
 
+
+  chosenPlayer: User;
+
+
+  setPlayer (player: User) {
+    this.chosenPlayer = player;
+  };
+
   players : User[] = [];
-  playerUpdate() {
+
+
+  playersUpdate() {
     let data = {
       user: {
         auth_token: this.getUser().token
@@ -117,18 +127,19 @@ export class MainComponent implements OnInit {
     };
     this.http.post("https://assimilite.herokuapp.com/api/players", data, this.options).subscribe(
       val => {
-        console.log('post module call successful value returned in body',
+        console.log('post players call successful value returned in body',
           val);
+        this.players = val['players'];
       },
       response => {
-        console.log('post modulecall in error', response);
+        console.log('post players call in error', response);
       },
       () => {
-        console.log('The post module observable is now completed.');
+        console.log('The post players observable is now completed.');
       }
     );
   }
-
+  modelId: number;
   submit(dataRaw: metaAndFormArray[]) {
     let th = this;
 
@@ -203,6 +214,8 @@ export class MainComponent implements OnInit {
         }
       }
     }));
+
+
     th.http.post(`${serverUrl}api/add_model`, {
         user: {
           auth_token: th.getUser().token
@@ -215,20 +228,47 @@ export class MainComponent implements OnInit {
         }
       },
     this.options
-  ).
-    subscribe(
+  )   .subscribe(
       val => {
         console.log('post module call successful value returned in body',
           val);
+
+        this.modelId = val['model']['id'];
+        let quest = {
+          user: {
+            auth_token: th.getUser().token
+          },
+          add: {
+            quest: {
+              model_id: this.modelId,
+              player_id: this.chosenPlayer.id,
+              supervisor_id: this.getUser().id,
+            }
+          }
+        };
+        th.http.post(`${serverUrl}api/add_model`, quest, this.options)
+          .subscribe(
+            val => {
+              console.log('post quest call successful value returned in body',
+                val);
+            },
+            response => {
+              console.log('post quest call in error', response);
+            },
+            () => {
+              console.log('The post quest observable is now completed.');
+            }
+          );
       },
       response => {
-        console.log('post modulecall in error', response);
+        console.log('post module call in error', response);
       },
       () => {
         console.log('The post module observable is now completed.');
       }
     );
-  }
+}
+
 
 
   constructor(private http: HttpClient) {

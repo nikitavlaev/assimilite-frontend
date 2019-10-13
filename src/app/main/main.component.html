@@ -42,11 +42,9 @@
       </div>
     </div>
     <div cdkDropList class="components comp-source"
-         cdkDropList
          #doneList="cdkDropList"
          [cdkDropListData]="sourceQuestCompList"
          [cdkDropListConnectedTo]="[todoList]"
-         class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div *ngFor="let comp of sourceQuestCompList" cdkDrag>
 
@@ -65,11 +63,12 @@
 </div>
 
 <button class="fixed-bottom" (click)="submit(destQuestCompList)" class="btn btn-primary btn-lg"> Submit</button>
-<button (click)="playersUpdate()" class="dropdown">
-  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<div class="dropdown">
+  <button (click)="playersUpdate()" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     Dropdown button
   </button>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <button (click)=setPlayer(player) *ngFor="let player of players" class="dropdown-item" type="button">Action</button>
+    <button (click)=setPlayer(player) *ngFor="let player of players" class="dropdown-item" type="button">{{player.name}}</button>
   </div>
-</button>
+</div>
+<span *ngIf="chosenPlayer"> {{chosenPlayer.name}} </span>
