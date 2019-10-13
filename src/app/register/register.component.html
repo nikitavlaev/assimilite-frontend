@@ -4,6 +4,17 @@
       <article class="card-body">
         <a href="{{upperLocation}}/login" class="float-right btn btn-outline-primary">Sign in</a>
         <h4 class="card-title mb-4 mt-1">Sign up</h4>
+
+          <div class="form-group">
+            <label class="form-label">Admin rights
+              <input type="checkbox" id="isAdmin" class="form-checkbox" placeholder="off">
+            </label>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Your name
+              <input id="name" class="form-control" placeholder="Name" type="name">
+            </label>
+          </div>
           <div class="form-group">
             <label class="form-label">Your email
               <input id="email" name="" class="form-control" placeholder="Email" type="email">
@@ -15,7 +26,8 @@
             </label>
           </div> <!-- form-group// -->
           <div class="d-flex justify-content-center align-items-center">
-            <button (click)="postInputValue()" type="submit" class="register btn btn-primary btn-block"> Register</button>
+            <button (click)="postInputValue()" type="submit" class="register btn btn-primary btn-block"> Register
+            </button>
           </div> <!-- form-group// -->
       </article>
     </div> <!-- card.// -->

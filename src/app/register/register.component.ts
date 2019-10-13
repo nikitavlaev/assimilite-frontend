@@ -20,9 +20,12 @@ export class RegisterComponent implements OnInit {
   }
 
   postInputValue() {
+    let isAdmin = ((<HTMLInputElement> document.getElementById("isAdmin")).checked);
+    let name = (<HTMLInputElement> document.getElementById("name")).value;
     let email = (<HTMLInputElement> document.getElementById("email")).value;
     let password = (<HTMLInputElement> document.getElementById("password")).value;
-    let currentUser: UserReg = {user:{email: email, password: password, name: "Sergei Dvinyatin", type: 1}};
+    alert(isAdmin);
+    let currentUser: UserReg = {user:{email: email, password: password, name: name, type: +isAdmin}};
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     const options = { headers: headers };
     this.http.post<UserReg>(`${this.serverUrl}auth/register`, currentUser, options).subscribe(

@@ -7,9 +7,13 @@
       </div>
     </div>
   </div>
-  <h1> Constructor </h1>
-  <span class="quest-name"> Quest name: <input id="main-name-input" placeholder="MyQuest"></span>
-  <div class="cons-wrapper row justify-content-between">
+  <div class="container-fluid">
+    <div class="column">
+      <h1 class="text-align-center"> Constructor </h1>
+      <span class="quest-name"> Quest name: <input id="main-name-input" placeholder="MyQuest"></span>
+    </div>
+  </div>
+  <div class="cons-wrapper row justify-content-around">
     <div cdkDropList class="components comp-dest border rounded d-flex flex-column"
          #todoList="cdkDropList"
          [cdkDropListData]="destQuestCompList"
@@ -38,11 +42,9 @@
       </div>
     </div>
     <div cdkDropList class="components comp-source"
-         cdkDropList
          #doneList="cdkDropList"
          [cdkDropListData]="sourceQuestCompList"
          [cdkDropListConnectedTo]="[todoList]"
-         class="example-list"
          (cdkDropListDropped)="drop($event)">
       <div *ngFor="let comp of sourceQuestCompList" cdkDrag>
 
@@ -60,3 +62,12 @@
   </div>
 </div>
 <button class="fixed-bottom" (click)="submit(destQuestCompList)" class="btn btn-primary btn-lg"> Submit</button>
+<div class="dropdown">
+  <button (click)="playersUpdate()" class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button (click)=setPlayer(player) *ngFor="let player of players" class="dropdown-item" type="button">{{player.name}}</button>
+  </div>
+</div>
+<span *ngIf="chosenPlayer"> {{chosenPlayer.name}} </span>

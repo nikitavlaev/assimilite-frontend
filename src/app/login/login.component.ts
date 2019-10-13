@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     this.upperLocation = this.currentLocation.substring(0,this.currentLocation.lastIndexOf('/'));
     this.serverUrl = "https://assimilite.herokuapp.com/";
   }
-x
+
   getInputValue() {
 
     let email = (<HTMLInputElement> document.getElementById("email")).value;
@@ -32,6 +32,7 @@ x
         console.log('post call successful value returned in body',
           val);
         let user: User = {
+          id: val['id'],
           name: val['name'],
           email: email,
           password: password,
