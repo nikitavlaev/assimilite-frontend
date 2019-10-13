@@ -1,0 +1,23 @@
+<div class="main-wrapper d-flex justify-content-center align-items-center">
+  <div class="wrapper">
+    <div class="card">
+      <article class="card-body">
+        <a href="{{upperLocation}}/register" class="float-right btn btn-outline-primary">Sign up</a>
+        <h4 class="card-title mb-4 mt-1">Sign in</h4>
+          <div class="form-group">
+            <label class="form-label">Your email
+            <input id="email" name="" class="form-control" placeholder="Email" type="email">
+            </label>
+          </div> <!-- form-group// -->
+          <div class="form-group">
+            <label class="form-label">Your password
+            <input id="password" class="form-control" placeholder="Password" type="password">
+            </label>
+          </div> <!-- form-group// -->
+          <div class="d-flex justify-content-center align-items-center">
+            <a class="ref" routerLink="/constructor"> <button (click)="getInputValue()" type="submit" class="login btn btn-primary btn-block"> Login</button> </a>
+          </div> <!-- form-group// -->
+      </article>
+    </div> <!-- card.// -->
+  </div>
+</div>
