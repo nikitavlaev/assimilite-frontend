@@ -1,0 +1,75 @@
+<div class="container-fluid" style="padding-right:0">
+  <div class="row justify-content-end">
+    <div class="login">
+      <div class="wrapper flex-row-wrap">
+        <img class="avatar" src="{{user.avatarURL}}">
+        <span> {{user.name}} </span>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="column">
+      <h1 class="text-align-center"> Constructor </h1>
+      <span class="quest-name"> Quest name: <input id="main-name-input" placeholder="MyQuest"></span>
+    </div>
+  </div>
+  <div class="cons-wrapper row justify-content-around">
+    <div cdkDropList class="components comp-dest border rounded d-flex flex-column"
+         #todoList="cdkDropList"
+         [cdkDropListData]="destQuestCompList"
+         [cdkDropListConnectedTo]="[doneList]"
+         (cdkDropListDropped)="drop($event)">
+      <span *ngIf="destQuestCompList.length == 0"> Drag here with @</span>
+      <div *ngFor="let comp of destQuestCompList" cdkDrag>
+        <div class="component border">
+          <span cdkDragHandle> @ {{comp.desc}} </span>
+          <div *ngFor="let control of comp.arr; index as i">
+            <div *ngIf="control.type=='bool'" class="form-check">
+              <input id="checkbox" class="form-check-input position-static" type="checkbox"
+                     [formControl]=control.form>
+              <label class="form-check-label" for="checkbox">
+                <span>{{control.desc}}</span>
+              </label>
+            </div>
+            <div *ngIf="control.type=='string'" class="form-input">
+              <label class="form-check-label" for="checkbox">
+                <span>{{control.desc}}</span>
+              </label>
+              <input class="form-control" *ngIf="control.type=='string'" [formControl]=control.form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div cdkDropList class="components comp-source"
+         cdkDropList
+         #doneList="cdkDropList"
+         [cdkDropListData]="sourceQuestCompList"
+         [cdkDropListConnectedTo]="[todoList]"
+         class="example-list"
+         (cdkDropListDropped)="drop($event)">
+      <div *ngFor="let comp of sourceQuestCompList" cdkDrag>
+
+        <div class="component border">
+          <span cdkDragHandle> @ {{comp.desc}} </span>
+          <!--          <div *ngFor="let control of comp.arr; index as i">-->
+          <!--            <span *ngIf="control.type!='id'">{{control.desc}}</span>-->
+          <!--            <input type="checkbox" *ngIf="control.type=='bool'" [formControl]=control.form>-->
+          <!--            <input *ngIf="control.type=='string'" [formControl]=control.form>-->
+          <!--          </div>-->
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<button class="fixed-bottom" (click)="submit(destQuestCompList)" class="btn btn-primary btn-lg"> Submit</button>
+<button (click)="playersUpdate()" class="dropdown">
+  <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Dropdown button
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <button (click)=setPlayer(player) *ngFor="let player of players" class="dropdown-item" type="button">Action</button>
+  </div>
+</button>
