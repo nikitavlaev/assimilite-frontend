@@ -1,7 +1,6 @@
 .login {
-  width: 10em;
-  height: 10em;
-  background-color: lightblue;
+  width: 3em;
+  height: 3em;
 }
 
 .wrapper {
@@ -22,6 +21,7 @@
 
 .comp-source .cdk-drag-placeholder {
   opacity: 1;
+
 }
 
 .comp-dest {
@@ -43,7 +43,6 @@
 }
 
 .component {
-  border-color: lightgray;
 }
 
 .comp-dest .component {

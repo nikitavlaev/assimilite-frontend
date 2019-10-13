@@ -2,4 +2,5 @@
 *::before,
 *::after {
   box-sizing: border-box;
+  background: #F2F2F2;
 }
